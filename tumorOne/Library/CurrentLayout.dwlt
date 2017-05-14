@@ -108,7 +108,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 1
-  controlID: 129
+  controlID: 21
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 130
+  controlID: 22
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -204,8 +204,8 @@ MonoBehaviour:
     y: 0
     width: 354
     height: 563
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -284,10 +284,10 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 99
-    width: 670
-    height: 647
+    x: 0
+    y: 91
+    width: 1159
+    height: 927
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
@@ -316,25 +316,25 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
-      width: 670
-      height: 630
-    m_Scale: {x: 1.6832051, y: 1.6832051}
-    m_Translation: {x: 335, y: 315}
+      width: 1159
+      height: 910
+    m_Scale: {x: 1.683205, y: 1.6832051}
+    m_Translation: {x: 579.5, y: 455.00003}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -199.02505
-      y: -187.14296
-      width: 398.0501
-      height: 374.28592
+      x: -344.28366
+      y: -270.31763
+      width: 688.5673
+      height: 540.63525
     m_MinimalGUI: 1
-  m_defaultScale: 0.6542969
+  m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 670, y: 647}
+  m_LastWindowPixelSize: {x: 1159, y: 927}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.040408596, y: -0.89109075, z: 0.44471255, w: -0.08096463}
     speed: 2
-    m_Value: {x: -0.040408596, y: -0.89109075, z: 0.44471255, w: -0.08096463}
+    m_Value: {x: 0.040408593, y: 0.89109075, z: -0.44471255, w: 0.080964625}
   m_Size:
     m_Target: 183.39519
     speed: 2
@@ -492,8 +492,8 @@ MonoBehaviour:
     height: 542
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 60250000
-    m_LastClickedID: 9568
+    m_SelectedIDs: aa250000
+    m_LastClickedID: 9642
     m_ExpandedIDs: dcfbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -554,19 +554,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Prefabs/room
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/room
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Greg\Documents\Unity Projects\CancerStorm\tumorOne
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 10250000
-    m_LastClickedID: 9488
-    m_ExpandedIDs: 000000009e2400000825000000ca9a3bffffff7f
+    m_SelectedIDs: 32270000
+    m_LastClickedID: 10034
+    m_ExpandedIDs: 000000009e2400001a25000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -594,7 +594,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009e24000008250000
+    m_ExpandedIDs: 000000009e2400001a250000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
