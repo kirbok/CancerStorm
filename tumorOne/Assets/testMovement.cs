@@ -4,11 +4,9 @@ using UnityEngine;
 
 
 
-public class PlayerController : MonoBehaviour {
+public class testMovement : MonoBehaviour {
 	float speed = 2.0f;
 	Vector3 pos;
-	Vector3 forward;
-	Vector3 finalPos;
 	Transform tr;
 
 	// Use this for initialization
@@ -17,16 +15,12 @@ public class PlayerController : MonoBehaviour {
 		pos = transform.position;
 		tr = transform;
 	}
-
+	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown("space"))
+		if (Input.GetKey(KeyCode.D) && tr.position == pos)
 		{
-			forward = transform.forward;
-			finalPos = forward;
-			finalPos = Quaternion.Euler(0, 90, 0) * finalPos;
-			float step = speed * Time.deltaTime;
-			transform.position = Vector3.RotateTowards (forward, finalPos, step, 0.0f);
+			pos += Vector3.right;
 		}
 		else if (Input.GetKey(KeyCode.A) && tr.position == pos)
 		{
@@ -34,13 +28,13 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (Input.GetKey(KeyCode.W) && tr.position == pos)
 		{
-			pos += Vector3.forward;
+			pos += Vector3.up;
 		}
 		else if (Input.GetKey(KeyCode.S) && tr.position == pos)
 		{
-			pos += Vector3.back;
+			pos += Vector3.down;
 		}
 
-		//transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+		transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
 	}
 }
