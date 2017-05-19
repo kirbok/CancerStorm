@@ -3,22 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	private CharacterController rb;
+	private CharacterController cc;
 	private bool movingfor, movingrev, rotting;
 	private int counter;
 	private float posx, posz;
+	private Rigidbody collider;
 	// Use this for initialization
 	void Start () {
+		cc = GetComponent<CharacterController>();
 		//rb = GetComponent<>();
 		movingfor = false;
 		movingrev = false;
 		counter = 0;
 		rotting = false;
+
+		collider = GetComponent<Collider> ().attachedRigidbody;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveVertical = Input.GetAxis ("Vertical");
+
+		if (moveVertical > 0) { //move forward
+			movingfor = true;
+			posx = collider.position.x;
+			posz = collider.position.z;
+		} else if (moveVertical < 0) { //move backward
+			movingrev = true;
+			posx = collider.position.x;
+			posz = collider.position.z;
+		}
+		Vector3 forward = transform.TransformDirection(Vector3.forward);
+
+		cc.SimpleMove (forward * 3);
 	}
 	/*
 	void FixedUpdate () {
