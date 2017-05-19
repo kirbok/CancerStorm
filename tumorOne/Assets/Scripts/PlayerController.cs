@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour {
 	private int counter;
 	private float posx, posz;
 	private Rigidbody collider;
+	private Vector3 forward, reverse;
+
+
 	// Use this for initialization
 	void Start () {
 		cc = GetComponent<CharacterController>();
@@ -23,22 +26,41 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!movingfor && !rotting && !movingrev) {
+			float moveVertical = Input.GetAxis ("Vertical");
 
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
-
-		if (moveVertical > 0) { //move forward
-			movingfor = true;
-			posx = collider.position.x;
-			posz = collider.position.z;
-		} else if (moveVertical < 0) { //move backward
-			movingrev = true;
-			posx = collider.position.x;
-			posz = collider.position.z;
+			if (moveVertical > 0) { //move forward
+				movingfor = true;
+				Vector3 forward = transform.TransformDirection(Vector3.forward);
+				posx = collider.position.x;
+				posz = collider.position.z;
+			} else if (moveVertical < 0) { //move backward
+				movingrev = true;
+				Vector3 reverse = transform.TransformDirection(Vector3.back);
+				posx = collider.position.x;
+				posz = collider.position.z;
+			}
 		}
-		Vector3 forward = transform.TransformDirection(Vector3.forward);
 
-		cc.SimpleMove (forward * 3);
+		if (!movingfor && !movingrev) {
+			float moveHorizontal = Input.GetAxis ("Horizontal");
+			if (moveHorizontal < 0) { //turn left
+				rotting = true;
+			} else if (moveHorizontal > 0) { //turn right
+				rotting = true;
+			}
+		}
+
+		if (movingfor) {
+			if (transform.eulerAngles.y == 90) {
+				cc.SimpleMove (forward * 3);
+			}
+			} else if (movingrev) {
+			if (transform.eulerAngles.y == 90) {
+				cc.SimpleMove (reverse * 3);
+			}
+
+		}
 	}
 	/*
 	void FixedUpdate () {
@@ -88,3 +110,4 @@ public class PlayerController : MonoBehaviour {
 
 	}*/
 }
+
