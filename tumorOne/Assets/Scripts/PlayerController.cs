@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	private Rigidbody rb;
+	private CharacterController rb;
 	private bool movingfor, movingrev, rotting;
 	private int counter;
 	private float posx, posz;
 	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody>();
+		//rb = GetComponent<>();
 		movingfor = false;
 		movingrev = false;
 		counter = 0;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		
 	}
-
+	/*
 	void FixedUpdate () {
 		if (movingfor) {
 			transform.Translate (new Vector3 (0, 0, 20) * Time.deltaTime, Space.Self);
@@ -66,5 +66,5 @@ public class PlayerController : MonoBehaviour {
 				
 		}
 
-	}
+	}*/
 }
