@@ -5,42 +5,47 @@ using UnityEngine;
 
 
 public class PlayerController : MonoBehaviour {
-	float speed = 2.0f;
-	Vector3 pos;
+	float speed = 6.0f;
+	Quaternion pos;
 	Vector3 forward;
-	Vector3 finalPos;
+	Quaternion finalPos;
 	Transform tr;
+	//float angle;
 
 	// Use this for initialization
 	void Start () {
 
-		pos = transform.position;
+		pos = transform.rotation;
 		tr = transform;
+		finalPos = pos;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown("space"))
+		if (Input.GetKeyDown("d"))
 		{
-			forward = transform.forward;
-			finalPos = forward;
-			finalPos = Quaternion.Euler(0, 90, 0) * finalPos;
-			float step = speed * Time.deltaTime;
-			transform.position = Vector3.RotateTowards (forward, finalPos, step, 0.0f);
+			finalPos = Quaternion.Euler(new Vector3(pos.eulerAngles.x, pos.eulerAngles.y + 90, pos.eulerAngles.z));
 		}
-		else if (Input.GetKey(KeyCode.A) && tr.position == pos)
+		else if (Input.GetKeyDown("a"))
 		{
-			pos += Vector3.left;
+			finalPos = Quaternion.Euler(new Vector3(pos.eulerAngles.x, pos.eulerAngles.y - 90, pos.eulerAngles.z));
 		}
-		else if (Input.GetKey(KeyCode.W) && tr.position == pos)
-		{
-			pos += Vector3.forward;
-		}
-		else if (Input.GetKey(KeyCode.S) && tr.position == pos)
-		{
-			pos += Vector3.back;
-		}
+//		else if (Input.GetKey(KeyCode.W) && tr.position == pos)
+//		{
+//			pos += Vector3.forward;
+//		}
+//		else if (Input.GetKey(KeyCode.S) && tr.position == pos)
+//		{
+//			pos += Vector3.back;
+//		}
+//
+//		//transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+	}
 
-		//transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+	void FixedUpdate() {
+		transform.rotation = Quaternion.Slerp(transform.rotation, finalPos, Time.deltaTime * speed);
+		/*if ((finalPos.eulerAngles.y - transform.rotation.eulerAngles.y) < 1 &&  (finalPos.eulerAngles.y - transform.rotation.eulerAngles.y) > -1) {
+			transform.rotation = finalPos;
+		}*/
 	}
 }
