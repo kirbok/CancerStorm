@@ -7,8 +7,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 	float rotSpeed = 6.0f;
 	float moveSpeed = 6.0f;
-	Quaternion rot, finalRot;
+	Quaternion rot;
 	Vector3 finalPos, pos;
+	Vector3 testRot;
 	Transform tr;
 	int counter = 0;
 	//float angle;
@@ -19,7 +20,6 @@ public class PlayerController : MonoBehaviour {
 		rot = transform.rotation;
 		pos = transform.position;
 		tr = transform;
-		finalRot = rot;
 		finalPos = pos;
 	}
 
@@ -55,15 +55,18 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		if (counter == 0) {
 			if (Input.GetAxis ("Horizontal") > 0) {
-				finalRot = Quaternion.Euler (new Vector3 (rot.eulerAngles.x, rot.eulerAngles.y + 90, rot.eulerAngles.z));
-				//finalPos = Quaternion.LookRotation(new Vector3(pos.eulerAngles.x, pos.eulerAngles.z, pos.eulerAngles.y + 90));
+				//gets vector pointing 90 degrees from forward
+				testRot = Quaternion.Euler(0, 90, 0) * transform.forward;
+
 				counter = 20;
 			} else if (Input.GetAxis ("Horizontal") < 0) {
-				finalRot = Quaternion.Euler (new Vector3 (rot.eulerAngles.x, rot.eulerAngles.y - 90, rot.eulerAngles.z));
-				//finalPos = Quaternion.LookRotation(new Vector3(pos.eulerAngles.x, pos.eulerAngles.z, pos.eulerAngles.y - 90));
+				//gets vector pointing -90 degrees from forward
+				testRot = Quaternion.Euler(0, -90, 0) * transform.forward;
+
 				counter = 20;
 			} else if (Input.GetAxis ("Vertical") > 0) {
-				finalPos = MoveForward ();
+				//finalPos = MoveForward ();
+				finalPos = transform.forward * 10;
 				counter = 20;
 			} else if (Input.GetAxis ("Vertical") < 0) {
 				finalPos = MoveBackward ();
@@ -78,7 +81,9 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate() {
 		transform.position = Vector3.MoveTowards (pos, finalPos, Time.deltaTime * moveSpeed);
-		tr.rotation = Quaternion.Slerp(tr.rotation, finalRot, Time.deltaTime * rotSpeed);
+		Vector3 newDir = Vector3.RotateTowards (transform.forward, testRot, moveSpeed * Time.deltaTime, 1);
+		transform.rotation = Quaternion.LookRotation (newDir);
+		//tr.rotation = Quaternion.Slerp(tr.rotation, finalRot, Time.deltaTime * rotSpeed);
 		/*if ((finalPos.eulerAngles.y - transform.rotation.eulerAngles.y) < 1 &&  (finalPos.eulerAngles.y - transform.rotation.eulerAngles.y) > -1) {
 			transform.rotation = finalPos;
 		}*/
