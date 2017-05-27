@@ -32,19 +32,19 @@ public class PlayerController : MonoBehaviour {
 				//gets vector pointing 90 degrees from forward
 				testRot = Quaternion.Euler(0, 90, 0) * transform.forward;
 
-				counter = 20;
+				counter = 30;
 			} else if (Input.GetAxis ("Horizontal") < 0) {
 				//gets vector pointing -90 degrees from forward
 				testRot = Quaternion.Euler(0, -90, 0) * transform.forward;
 
-				counter = 20;
+				counter = 30;
 			} else if (Input.GetAxis ("Vertical") > 0) {
 				
 				pos += transform.forward * 10;
-				counter = 20;
+				counter = 30;
 			} else if (Input.GetAxis ("Vertical") < 0) {
 				pos += -transform.forward * 10;
-				counter = 20;
+				counter = 30;
 			}
 		} else {
 			counter--;
