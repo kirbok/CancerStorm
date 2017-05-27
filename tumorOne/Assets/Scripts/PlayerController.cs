@@ -5,8 +5,9 @@ using UnityEngine;
 
 
 public class PlayerController : MonoBehaviour {
-	float rotSpeed = 6.0f;
-	float moveSpeed = 6.0f;
+	public float rotSpeed = 6.0f;
+	public float moveSpeed = 6.0f;
+	public float walkSpeed = 16.0f;
 	Quaternion rot;
 	Vector3 finalPos, pos;
 	Vector3 testRot;
@@ -20,36 +21,9 @@ public class PlayerController : MonoBehaviour {
 		rot = transform.rotation;
 		pos = transform.position;
 		tr = transform;
-		finalPos = pos;
-	}
 
-	Vector3 MoveForward() {
-		Vector3 v3 = Vector3.zero;
-		if (Mathf.Approximately(rot.eulerAngles.y,90.0f)) {
-			v3 = new Vector3 (tr.position.x,tr.position.y ,tr.position.z - 10);
-		} else if (Mathf.Approximately(rot.eulerAngles.y,-90.0f)) {
-			v3 = new Vector3 (tr.position.x,tr.position.y ,tr.position.z + 10);
-		} else if (Mathf.Approximately(rot.eulerAngles.y,0.0f)) {
-			v3 = new Vector3 (tr.position.x - 10,tr.position.y ,tr.position.z);
-		} else if (Mathf.Approximately(rot.eulerAngles.y,180.0f)) {
-			v3 = new Vector3 (tr.position.x + 10,tr.position.y ,tr.position.z);
-		}
-		return v3;
 	}
-
-	Vector3 MoveBackward() {
-		Vector3 v3 = Vector3.zero;
-		if (rot.eulerAngles.y == 90) {
-			v3 = new Vector3 (tr.position.x,tr.position.y ,tr.position.z + 10);
-		} else if (rot.eulerAngles.y == 270) {
-			v3 = new Vector3 (tr.position.x,tr.position.y ,tr.position.z - 10);
-		} else if (rot.eulerAngles.y == 0) {
-			v3 = new Vector3 (tr.position.x + 10,tr.position.y ,tr.position.z);
-		} else if (rot.eulerAngles.y == 180) {
-			v3 = new Vector3 (tr.position.x - 10,tr.position.y ,tr.position.z);
-		}
-		return v3;
-	}
+		
 
 	// Update is called once per frame
 	void Update () {
@@ -65,27 +39,22 @@ public class PlayerController : MonoBehaviour {
 
 				counter = 20;
 			} else if (Input.GetAxis ("Vertical") > 0) {
-				//finalPos = MoveForward ();
-				finalPos = transform.forward * 10;
+				
+				pos += transform.forward * 10;
 				counter = 20;
 			} else if (Input.GetAxis ("Vertical") < 0) {
-				finalPos = MoveBackward ();
+				pos += -transform.forward * 10;
 				counter = 20;
 			}
 		} else {
 			counter--;
 		}
-		//tr.rotation = Quaternion.Slerp(tr.rotation, finalPos, Time.deltaTime * speed);
-//		//transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);
+
 	}
 
 	void FixedUpdate() {
-		transform.position = Vector3.MoveTowards (pos, finalPos, Time.deltaTime * moveSpeed);
+		transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * walkSpeed);
 		Vector3 newDir = Vector3.RotateTowards (transform.forward, testRot, moveSpeed * Time.deltaTime, 1);
 		transform.rotation = Quaternion.LookRotation (newDir);
-		//tr.rotation = Quaternion.Slerp(tr.rotation, finalRot, Time.deltaTime * rotSpeed);
-		/*if ((finalPos.eulerAngles.y - transform.rotation.eulerAngles.y) < 1 &&  (finalPos.eulerAngles.y - transform.rotation.eulerAngles.y) > -1) {
-			transform.rotation = finalPos;
-		}*/
 	}
 }
